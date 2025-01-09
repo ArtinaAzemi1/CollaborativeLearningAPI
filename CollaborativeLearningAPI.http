@@ -1,0 +1,6 @@
+@CollaborativeLearningAPI_HostAddress = http://localhost:5267
+
+GET {{CollaborativeLearningAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
