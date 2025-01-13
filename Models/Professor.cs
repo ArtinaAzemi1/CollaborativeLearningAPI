@@ -1,8 +1,10 @@
 ﻿namespace CollaborativeLearningAPI.Models
 {
-    public class Mentor : Staff
+    public class Professor : Staff
     {
         public string Title { get; set; }
+
+        public string subjectArea { get; set; }
 
     }
 }
