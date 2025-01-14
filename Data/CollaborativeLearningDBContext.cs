@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CollaborativeLearningAPI.Data
 {
-    public class CollaborativeLearningDB : DbContext
+    public class CollaborativeLearningDBContext : DbContext
     {
-        public CollaborativeLearningDB(DbContextOptions<CollaborativeLearningDB> options) : base(options)
+        public CollaborativeLearningDBContext(DbContextOptions<CollaborativeLearningDBContext> options) : base(options)
         { }
 
         public DbSet<Student> Students { get; set; }
