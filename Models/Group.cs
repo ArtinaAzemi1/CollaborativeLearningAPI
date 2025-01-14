@@ -4,7 +4,7 @@
     {
         public int GroupId { get; set; }
 
-        public string Name { get; set; }
+        public string GroupName { get; set; }
 
         public int Year { get; set; }
 

@@ -20,7 +20,7 @@ namespace CollaborativeLearningAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Student>>> GetStudents()
         {
-            return await _context.Students.ToListAsync();
+            return await _context.Students.Include(s => s.Groups).ToListAsync();
         }
 
 
