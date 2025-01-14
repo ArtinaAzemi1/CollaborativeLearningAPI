@@ -37,8 +37,20 @@ namespace CollaborativeLearningAPI.Controllers
             return group;
         }
 
-        // PUT: api/Professors/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpGet("{id}/Students")]
+        public async Task<ActionResult<List<Student>>> GetGroupsStudents(int id)
+        {
+            var group = await _context.Groups.Include(x => x.Students).Where(x => x.GroupId == id).FirstOrDefaultAsync();
+
+            if (group == null)
+            {
+                return NotFound();
+            }
+            List<Student> students = group.Students.ToList();
+
+            return students;
+        }
+
         [HttpPut("{id}")]
         public async Task<IActionResult> PutGroup(int id, Group group)
         {
@@ -77,7 +89,6 @@ namespace CollaborativeLearningAPI.Controllers
             return CreatedAtAction("GetGroup", new { id = group.GroupId }, group);
         }
 
-        // DELETE: api/Professors/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteGroup(int id)
         {
