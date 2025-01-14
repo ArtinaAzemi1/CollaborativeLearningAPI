@@ -1,4 +1,8 @@
-﻿namespace CollaborativeLearningAPI.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
+using System.Text.RegularExpressions;
+
+namespace CollaborativeLearningAPI.Models
 {
     public class Student
     {
@@ -9,6 +13,10 @@
         public string? Surname { get; set; }
 
         public string? Email { get; set; }
+
+        public int? GroupId { get; set; }
+        [ForeignKey("GroupId")]
+        public Group Groups { get; set; }
 
     }
 }
