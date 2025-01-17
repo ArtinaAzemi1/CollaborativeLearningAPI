@@ -51,10 +51,10 @@ namespace CollaborativeLearningAPI.Controllers
             return students;
         }
 
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutGroup(int id, Group group)
+        [HttpPut("{groupId}")]
+        public async Task<IActionResult> PutGroup(int groupId, Group group)
         {
-            if (id != group.GroupId)
+            if (groupId != group.GroupId)
             {
                 return BadRequest();
             }
@@ -67,7 +67,7 @@ namespace CollaborativeLearningAPI.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!GroupExists(id))
+                if (!GroupExists(groupId))
                 {
                     return NotFound();
                 }
