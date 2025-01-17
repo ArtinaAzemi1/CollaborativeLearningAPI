@@ -4,7 +4,7 @@
     {
         public string Title { get; set; }
 
-        public string subjectArea { get; set; }
+        public string SubjectArea { get; set; }
 
     }
 }
