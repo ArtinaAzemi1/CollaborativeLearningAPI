@@ -18,5 +18,7 @@ namespace CollaborativeLearningAPI.Models
         [ForeignKey("GroupId")]
         public Group Groups { get; set; }
 
+        public virtual ICollection<Course> Courses { get; set; }
+
     }
 }

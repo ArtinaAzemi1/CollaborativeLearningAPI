@@ -9,5 +9,7 @@
         public double ECTS { get; set; }
 
         public string Semester { get; set; }
+
+        public virtual ICollection<Student> Students { get; set; }
     }
 }
