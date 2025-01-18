@@ -43,30 +43,26 @@ namespace CollaborativeLearningAPI.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutStudent(int id, Student student)
         {
-            if (id != student.StudentId)
+            if (!ModelState.IsValid)
             {
-                return BadRequest();
+                return BadRequest(ModelState);
             }
 
-            _context.Entry(student).State = EntityState.Modified;
+            if (id != student.StudentId)
+            {
+                return BadRequest(new { message = "ID mismatch." });
+            }
 
             try
             {
-                await _context.SaveChangesAsync();
+                _studentService.UpdateStudent(student);
+                return NoContent();
             }
-            catch (DbUpdateConcurrencyException)
+            catch (Exception ex)
             {
-                if (!StudentExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                return NotFound(new { message = ex.Message });
             }
 
-            return NoContent();
         }
 
         [HttpPost]
@@ -88,26 +84,25 @@ namespace CollaborativeLearningAPI.Controllers
             }
         }
 
-        // DELETE: api/Professors/5
+        
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteStudent(int id)
         {
-            var student = await _context.Students.FindAsync(id);
-            if (student == null)
+            try
             {
-                return NotFound();
+                _studentService.DeleteStudent(id);
+                return NoContent();
             }
-
-            _context.Students.Remove(student);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
+            catch (Exception ex)
+            {
+                return NotFound(new { message = ex.Message });
+            }
         }
 
-        private bool StudentExists(int id)
-        {
-            return _context.Students.Any(e => e.StudentId == id);
-        }
+        //private bool StudentExists(int id)
+        //{
+          //  return _context.Students.Any(e => e.StudentId == id);
+        //}
     }
 
 }
