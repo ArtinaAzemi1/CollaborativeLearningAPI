@@ -35,11 +35,26 @@ namespace CollaborativeLearningAPI.Services
             {
                 throw new Exception("Student name cannot be empty.");
             }
-            return _studentRepository.AddStudentAsync(student);
+             _studentRepository.AddStudentAsync(student);
         }
 
+        public async void UpdateStudent(Student student)
+        {
+            if (string.IsNullOrWhiteSpace(student.Name))
+            {
+                throw new Exception("Student name cannot be empty.");
+            }
+            _studentRepository.UpdateStudentAsync(student);
+        }
 
-
-
+        public async void DeleteStudent(int id)
+        {
+            var student = await _studentRepository.GetStudent(id);
+            if (student == null)
+            {
+                throw new Exception("Cannot delete student that does not exist.");
+            }
+             _studentRepository.DeleteStudent(id);
+        }
     }
 }

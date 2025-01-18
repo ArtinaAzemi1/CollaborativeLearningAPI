@@ -11,6 +11,6 @@ namespace CollaborativeLearningAPI.Data.Repository
 
         public void UpdateStudentAsync(Student student);
 
-        public void DeleteStudent(Student student);
+        public void DeleteStudent(int id);
     }
 }

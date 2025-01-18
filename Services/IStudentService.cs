@@ -8,7 +8,7 @@ namespace CollaborativeLearningAPI.Services
         Task<Student> GetStudentByIdAsync(int id);
         public void AddStudent(Student student);
         public void UpdateStudent(Student student);
-        public void DeleteStudent(Student student);
+        public void DeleteStudent(int id);
 
     }
 }
