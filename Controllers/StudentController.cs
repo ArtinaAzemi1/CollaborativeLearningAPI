@@ -29,14 +29,15 @@ namespace CollaborativeLearningAPI.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Student>> GetStudent(int id)
         {
-            var student = await _context.Students.FindAsync(id);
-
-            if (student == null)
+            try
             {
-                return NotFound();
+                var student = await _studentService.GetStudentByIdAsync(id);
+                return Ok(student);
             }
-
-            return student;
+            catch (Exception ex)
+            {
+                return NotFound(new { message = ex.Message });
+            }
         }
 
         [HttpPut("{id}")]
@@ -71,9 +72,20 @@ namespace CollaborativeLearningAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<Student>> PostStudent(Student student)
         {
-            _studentService.AddStudentAsync(student);
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
-            return CreatedAtAction("GetStudent", new { id = student.StudentId }, student);
+            try
+            {
+                _studentService.AddStudent(student);
+                return CreatedAtAction(nameof(GetStudent), new { id = student.StudentId }, student);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
         }
 
         // DELETE: api/Professors/5
