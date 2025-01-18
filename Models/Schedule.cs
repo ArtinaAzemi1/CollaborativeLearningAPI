@@ -1,4 +1,6 @@
-﻿namespace CollaborativeLearningAPI.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace CollaborativeLearningAPI.Models
 {
     public class Schedule
     {

@@ -10,5 +10,6 @@ namespace CollaborativeLearningAPI.Data
 
         public DbSet<Student> Students { get; set; }
         public DbSet<Group> Groups { get; set; }
+        public DbSet<Course> Courses { get; set; }
     }
 }
