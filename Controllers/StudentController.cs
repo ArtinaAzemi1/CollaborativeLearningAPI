@@ -1,5 +1,6 @@
 ﻿using CollaborativeLearningAPI.Data;
 using CollaborativeLearningAPI.Models;
+using CollaborativeLearningAPI.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -11,10 +12,12 @@ namespace CollaborativeLearningAPI.Controllers
     public class StudentController : ControllerBase
     {
         private readonly CollaborativeLearningDBContext _context;
+        private readonly IStudentService _studentService;
 
-        public StudentController(CollaborativeLearningDBContext context)
+        public StudentController(CollaborativeLearningDBContext context, IStudentService studentService)
         {
             _context = context;
+            _studentService = studentService;
         }
 
         [HttpGet]
@@ -71,8 +74,7 @@ namespace CollaborativeLearningAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<Student>> PostStudent(Student student)
         {
-            _context.Students.Add(student);
-            await _context.SaveChangesAsync();
+            _studentService.AddStudentAsync(student);
 
             return CreatedAtAction("GetStudent", new { id = student.StudentId }, student);
         }
