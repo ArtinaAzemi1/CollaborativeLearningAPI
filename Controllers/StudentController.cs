@@ -11,19 +11,18 @@ namespace CollaborativeLearningAPI.Controllers
     [ApiController]
     public class StudentController : ControllerBase
     {
-        private readonly CollaborativeLearningDBContext _context;
         private readonly IStudentService _studentService;
 
-        public StudentController(CollaborativeLearningDBContext context, IStudentService studentService)
+        public StudentController(IStudentService studentService)
         {
-            _context = context;
             _studentService = studentService;
         }
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Student>>> GetStudents()
         {
-            return await _context.Students.ToListAsync();
+            var students = await _studentService.GetAllStudentsAsync();
+            return Ok(students);
         }
 
 
@@ -40,8 +39,6 @@ namespace CollaborativeLearningAPI.Controllers
             return student;
         }
 
-        // PUT: api/Professors/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutStudent(int id, Student student)
         {
