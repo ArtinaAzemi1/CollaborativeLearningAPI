@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using CollaborativeLearningAPI.Data;
 using CollaborativeLearningAPI.Models;
+using CollaborativeLearningAPI.Data.Repository;
+using CollaborativeLearningAPI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,6 +25,10 @@ builder.Services.AddCors(options =>
                           .AllowAnyMethod()
                           .AllowAnyHeader());
 });
+
+
+builder.Services.AddScoped<IStudentRepository, StudentRepository>();
+builder.Services.AddScoped<IStudentService, StudentService>();
 
 var app = builder.Build();
 
