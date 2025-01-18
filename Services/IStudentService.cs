@@ -4,6 +4,11 @@ namespace CollaborativeLearningAPI.Services
 {
     public interface IStudentService
     {
-        public void AddStudentAsync(Student student);
+        Task<IEnumerable<Student>> GetAllStudentsAsync();
+        Task<Student> GetStudentByIdAsync(int id);
+        public void AddStudent(Student student);
+        public void UpdateStudent(Student student);
+        public void DeleteStudent(Student student);
+
     }
 }

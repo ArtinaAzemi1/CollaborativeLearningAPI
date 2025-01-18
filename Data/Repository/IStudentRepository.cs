@@ -6,5 +6,11 @@ namespace CollaborativeLearningAPI.Data.Repository
     {
         Task<IEnumerable<Student>> GetStudents();
         Task<Student> GetStudent(int id);
+
+        public void AddStudentAsync(Student student);
+
+        public void UpdateStudentAsync(Student student);
+
+        public void DeleteStudent(Student student);
     }
 }

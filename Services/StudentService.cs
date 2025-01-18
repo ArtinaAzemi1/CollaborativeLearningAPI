@@ -1,4 +1,5 @@
 ﻿using CollaborativeLearningAPI.Data;
+using CollaborativeLearningAPI.Data.Repository;
 using CollaborativeLearningAPI.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,18 +8,37 @@ namespace CollaborativeLearningAPI.Services
     public class StudentService : IStudentService
     {
 
-        private readonly CollaborativeLearningDBContext _context;
+        private readonly StudentRepository _studentRepository;
 
-        public StudentService(CollaborativeLearningDBContext context)
+        public StudentService(StudentRepository studentRepository)
         {
-            _context = context;
+            _studentRepository = studentRepository;
         }
-        public void AddStudentAsync(Student student)
+
+        public async Task<IEnumerable<Student>> GetAllStudentsAsync()
         {
-            _context.Students.Add(student);
-            await _context.SaveChangesAsync();
-            return CreatedAtAction("GetStudent", new { id = student.StudentId }, student);
+            return await _studentRepository.GetStudents();
         }
+
+        public async Task<Student> GetStudentByIdAsync(int id)
+        {
+            var student = await _studentRepository.GetStudent(id);
+            if (student == null)
+            {
+                throw new Exception("Student not found.");
+            }
+            return student;
+        }
+        public async void AddStudent(Student student)
+        {
+            if (string.IsNullOrWhiteSpace(student.Name))
+            {
+                throw new Exception("Student name cannot be empty.");
+            }
+            return _studentRepository.AddStudentAsync(student);
+        }
+
+
 
 
     }
