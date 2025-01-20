@@ -8,9 +8,9 @@ namespace CollaborativeLearningAPI.Services
     public class StudentService : IStudentService
     {
 
-        private readonly StudentRepository _studentRepository;
+        private readonly IStudentRepository _studentRepository;
 
-        public StudentService(StudentRepository studentRepository)
+        public StudentService(IStudentRepository studentRepository)
         {
             _studentRepository = studentRepository;
         }
