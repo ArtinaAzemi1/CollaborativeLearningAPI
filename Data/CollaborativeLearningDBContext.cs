@@ -23,10 +23,15 @@ namespace CollaborativeLearningAPI.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Staff>().ToTable("Staff");
             modelBuilder.Entity<Professor>().ToTable("Professor");
             modelBuilder.Entity<Assistant>().ToTable("Assistant");
             modelBuilder.Entity<Coordinator>().ToTable("Coordinator");
-            modelBuilder.Entity<Staff>().ToTable("Staff");
+
+            modelBuilder.Entity<Tasks>(entity =>
+            {
+                entity.HasKey(t => t.TaskId);
+            });
 
             base.OnModelCreating(modelBuilder);
         }
