@@ -3,6 +3,7 @@ using CollaborativeLearningAPI.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CollaborativeLearningAPI.Migrations
 {
     [DbContext(typeof(CollaborativeLearningDBContext))]
-    partial class CollaborativeLearningDBContextModelSnapshot : ModelSnapshot
+    [Migration("20250120131705_ProfessorAndResource")]
+    partial class ProfessorAndResource
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -102,6 +105,11 @@ namespace CollaborativeLearningAPI.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasMaxLength(13)
+                        .HasColumnType("nvarchar(13)");
+
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
@@ -113,9 +121,11 @@ namespace CollaborativeLearningAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Staff", (string)null);
+                    b.ToTable("Staff");
 
-                    b.UseTptMappingStrategy();
+                    b.HasDiscriminator().HasValue("Staff");
+
+                    b.UseTphMappingStrategy();
                 });
 
             modelBuilder.Entity("CollaborativeLearningAPI.Models.Student", b =>
@@ -195,7 +205,7 @@ namespace CollaborativeLearningAPI.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.ToTable("Professor", (string)null);
+                    b.HasDiscriminator().HasValue("Professor");
                 });
 
             modelBuilder.Entity("CollaborativeLearningAPI.Models.Resource", b =>
@@ -242,15 +252,6 @@ namespace CollaborativeLearningAPI.Migrations
                     b.HasOne("CollaborativeLearningAPI.Models.Student", null)
                         .WithMany()
                         .HasForeignKey("StudentsStudentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("CollaborativeLearningAPI.Models.Professor", b =>
-                {
-                    b.HasOne("CollaborativeLearningAPI.Models.Staff", null)
-                        .WithOne()
-                        .HasForeignKey("CollaborativeLearningAPI.Models.Professor", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
