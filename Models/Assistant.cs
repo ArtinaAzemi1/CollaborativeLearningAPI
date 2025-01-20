@@ -7,5 +7,7 @@
         public Boolean AssistsInGrading { get; set; }
 
         public Boolean HelpsWithProjects { get; set; }
+
+        public virtual ICollection<Tasks> Tasks { get; set; }
     }
 }
