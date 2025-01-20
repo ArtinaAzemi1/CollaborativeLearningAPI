@@ -29,7 +29,14 @@ namespace CollaborativeLearningAPI.Data.Repository
                 .Include(g => g.Students)
                 .FirstOrDefaultAsync(g => g.GroupId == groupId);
 
-            return group?.Students?.ToList() ?? new List<Student>();
+            if (group == null)
+            {
+                throw new Exception($"Group with ID {groupId} not found.");
+            }
+
+            return group.Students.ToList();
+
+            //return group?.Students?.ToList() ?? new List<Student>();
         }
 
         public async void AddGroupAsync(Group group)
