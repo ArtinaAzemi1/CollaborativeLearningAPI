@@ -17,9 +17,9 @@ namespace CollaborativeLearningAPI.Data
         public DbSet<Professor> Professors { get; set; }
         public DbSet<Assistant> Assistant { get; set; }
         public DbSet<Coordinator> Coordinator { get; set; }
-
         public DbSet<Resource> Resources { get; set; }
         public DbSet<Tasks> Tasks { get; set; }
+        public DbSet<Schedule> Schedule { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -34,6 +34,11 @@ namespace CollaborativeLearningAPI.Data
             });
 
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Coordinator>()
+                .HasOne(c => c.Schedule)
+                .WithOne(s => s.Coordinator)
+                .HasForeignKey<Schedule>(s => s.CoordinatorId);
         }
 
     }

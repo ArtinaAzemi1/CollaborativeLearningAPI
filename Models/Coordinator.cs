@@ -8,5 +8,7 @@
         public int YearsOfExperience { get; set; }
 
         public string CertificationLevel { get; set; }
+
+        public virtual Schedule Schedule { get; set; }
     }
 }

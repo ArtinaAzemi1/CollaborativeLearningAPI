@@ -11,5 +11,8 @@ namespace CollaborativeLearningAPI.Models
         public TimeOnly End { get; set; }
 
         public string Hall { get; set; }
+
+        public int CoordinatorId { get; set; }
+        public virtual Coordinator Coordinator { get; set; }
     }
 }
