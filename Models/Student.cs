@@ -20,5 +20,7 @@ namespace CollaborativeLearningAPI.Models
 
         public virtual ICollection<Course> Courses { get; set; }
 
+        public virtual ICollection<Feedback> Feedbacks { get; set; }
+
     }
 }

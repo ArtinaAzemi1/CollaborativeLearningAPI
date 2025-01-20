@@ -20,6 +20,7 @@ namespace CollaborativeLearningAPI.Data
         public DbSet<Resource> Resources { get; set; }
         public DbSet<Tasks> Tasks { get; set; }
         public DbSet<Schedule> Schedule { get; set; }
+        public DbSet<Feedback> Feedbacks { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

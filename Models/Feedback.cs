@@ -1,4 +1,6 @@
-﻿namespace CollaborativeLearningAPI.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace CollaborativeLearningAPI.Models
 {
     public class Feedback
     {
@@ -9,5 +11,9 @@
         public string Comment { get; set; }
 
         public DateTime Date { get; set; }
+
+        public int? StudentId { get; set; }
+        [ForeignKey("StudentId")]
+        public Student Students { get; set; }
     }
 }
