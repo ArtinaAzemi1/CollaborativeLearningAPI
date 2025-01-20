@@ -15,5 +15,9 @@ namespace CollaborativeLearningAPI.Models
         public int? StudentId { get; set; }
         [ForeignKey("StudentId")]
         public Student Students { get; set; }
+
+        public int? TaskId { get; set; }
+        [ForeignKey("TaskId")]
+        public Tasks Tasks { get; set; }
     }
 }

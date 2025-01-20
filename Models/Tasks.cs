@@ -19,5 +19,7 @@ namespace CollaborativeLearningAPI.Models
         public int? AssistantId { get; set; }
         [ForeignKey("AssistantId")]
         public Assistant Assistant { get; set; }
+
+        public virtual ICollection<Feedback> Feedbacks { get; set; }
     }
 }
