@@ -39,7 +39,12 @@ namespace CollaborativeLearningAPI.Data
                 .HasOne(c => c.Schedule)
                 .WithOne(s => s.Coordinator)
                 .HasForeignKey<Schedule>(s => s.CoordinatorId);
-        }
 
+            modelBuilder.Entity<Group>()
+               .HasOne(g => g.Schedule)
+               .WithOne(s => s.Group)
+               .HasForeignKey<Schedule>(s => s.GroupId);
+
+        }
     }
 }

@@ -11,5 +11,7 @@
         public int Capacity { get; set; }
 
         public virtual ICollection<Student> Students { get; set; }
+
+        public virtual Schedule Schedule { get; set; }
     }
 }

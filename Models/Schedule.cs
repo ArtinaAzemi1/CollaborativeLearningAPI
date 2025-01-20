@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.RegularExpressions;
 
 namespace CollaborativeLearningAPI.Models
 {
@@ -14,5 +15,8 @@ namespace CollaborativeLearningAPI.Models
 
         public int CoordinatorId { get; set; }
         public virtual Coordinator Coordinator { get; set; }
+
+        public int GroupId { get; set; }
+        public virtual Group Group { get; set; }
     }
 }
