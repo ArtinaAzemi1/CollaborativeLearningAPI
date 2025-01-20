@@ -23,13 +23,6 @@ namespace CollaborativeLearningAPI.Controllers
             return await _context.Courses.ToListAsync();
         }
 
-        /*[HttpGet("Subjects")]
-        public async Task<ActionResult<IEnumerable<Course>>> GetProfessorsSubjects()
-        {
-            return await _context.Courses.ToListAsync();
-        }
-        */
-
         [HttpGet("{id}")]
         public async Task<ActionResult<Course>> GetCourse(int id)
         {
