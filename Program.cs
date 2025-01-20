@@ -30,6 +30,9 @@ builder.Services.AddCors(options =>
 builder.Services.AddScoped<IStudentRepository, StudentRepository>();
 builder.Services.AddScoped<IStudentService, StudentService>();
 
+builder.Services.AddScoped<IGroupRepository, GroupRepository>();
+builder.Services.AddScoped<IGroupService, GroupService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CollaborativeLearningAPI.Data.Repository
 {
-    public class GroupRepository
+    public class GroupRepository : IGroupRepository
     {
         private CollaborativeLearningDBContext _context;
 

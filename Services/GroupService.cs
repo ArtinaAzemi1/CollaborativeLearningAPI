@@ -1,9 +1,10 @@
 ﻿using CollaborativeLearningAPI.Data.Repository;
 using CollaborativeLearningAPI.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace CollaborativeLearningAPI.Services
 {
-    public class GroupService
+    public class GroupService : IGroupService
     {
         private readonly IGroupRepository _groupRepository;
 
@@ -44,7 +45,7 @@ namespace CollaborativeLearningAPI.Services
             _groupRepository.UpdateGroupAsync(group);
         }
 
-        public async void DeleteStudent(int id)
+        public async void DeleteGroup(int id)
         {
             var group = await _groupRepository.GetGroupByIdAsync(id);
             if (group == null)
